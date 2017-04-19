@@ -61,7 +61,12 @@ function chinese(book) {
 	for(var k = 0; k < t; k++){
 		titleStr = titleStr.concat(str[k]);
 	}
-
+	//解决特殊情况
+	var m1 = titleStr.lastIndexOf('(');
+	var m2 = titleStr.lastIndexOf(')');
+	if(m1>m2){
+		titleStr = titleStr.slice(0,m1);
+	}
 	//两括号之间
 	var authorStr = '';
 	str = leftStr
@@ -70,6 +75,8 @@ function chinese(book) {
 	for(j = p1 + 1; j < p2; j++){
 		authorStr = authorStr.concat(str[j]);
 	}
+	authorStr = authorStr.match(/[^\(\)]+/g)[0];
+
 	//#和 之间
 	var positionStr = str.match(/#(\S*) /)[1];
 	positionStr = positionStr.match(/[\d]+/g)[0];
