@@ -8,7 +8,7 @@ function readAsText() {
 	//判断浏览器是否支持FileReader接口  
 	if (typeof FileReader == 'undefined') {  
 	    result.InnerHTML = "<p>你的浏览器不支持FileReader接口！</p>";
-	      
+
 	    //使选择控件不可操作  
 	    file.setAttribute("disabled","disabled");  
 	}
@@ -24,27 +24,27 @@ function readAsText() {
         //去行和分割字符串
         sourceString = this.result;
         sourceString = sourceString.replace(/[\r\n]/g,'');
-       	var bookList = sourceString.split('==========');
+       	var bookArray = sourceString.split('==========');
 		var book = [];
-		for (var i = 0; i < bookList.length-1; i++) {
+		for (var i = 0; i < bookArray.length-1; i++) {
 			var re = /\(/;
-			var str = bookList[i]
+			var str = bookArray[i]
 			re.test(str);
 			var str2 = RegExp.leftContext;
 			var book = book.concat(str2);
 		}
 	
 		//去重
-		var bookArray = Array.from(new Set(book));
-		console.log(bookArray);
+		var bookList = Array.from(new Set(book));
+		console.log(bookList);
 
 		//输出
-		for (var i = 0; i < bookList.length-1; i++) {
+		for (var i = 0; i < bookArray.length-1; i++) {
 			re = new RegExp("#");
-			if (re.test(bookList[i])) {
-				chinese(bookList[i]);
+			if (re.test(bookArray[i])) {
+				chinese(bookArray[i]);
 			} else {
-				English(bookList[i]);
+				English(bookArray[i]);
 			}
 		}
 		console.log(mark);
